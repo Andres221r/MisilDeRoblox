@@ -1,0 +1,23 @@
+# Instrucciones de uso del sistema de misiles
+
+1. **Modelo del misil**
+   - Crea en `ReplicatedStorage` un modelo llamado **Missile**.
+   - Debe contener una parte principal ("Body") con un `Attachment` llamado `MissileAttachment`.
+   - Asegura que `Body` sea la `PrimaryPart` del modelo.
+
+2. **Ubicacion de los scripts**
+   - Coloca `MissileConfig` (carpeta `src/Shared/MissileConfig.lua`) dentro de `ReplicatedStorage`.
+   - Coloca `MissileServer` (carpeta `src/Server/MissileServer.lua`) en `ServerScriptService`.
+   - Crea una `ScreenGui` llamada **MissileTargetingGui** en `StarterGui`. Dentro de ella crea:
+       - Un `Frame` con un `ScrollingFrame` llamado **TargetList**.
+       - Un `TextButton` llamado **SelectPosition** para seleccionar posiciones en el mapa.
+       - Inserta en esa `ScreenGui` el script `TargetingClient` (`src/Client/TargetingClient.lua`).
+
+3. **Uso del sistema**
+   - Al iniciar el juego, abre la GUI y usa el boton **SelectPosition** para marcar un punto del mapa como objetivo.
+   - En la lista **TargetList** aparecen todos los objetos del `workspace` excepto los definidos en `Config.ExcludedObjects`. Al pulsar uno, el misil seguira ese objeto en movimiento.
+   - Puedes ajustar velocidades, fuerza y otros parametros editando `MissileConfig.lua`.
+
+4. **Requisitos adicionales**
+   - Este sistema emplea `LinearVelocity` y `AlignOrientation` disponibles en Roblox a julio de 2025.
+   - El misil se autodestruye pasado el tiempo indicado en `AutoDestructTime` o al impactar, generando una `Explosion`.
